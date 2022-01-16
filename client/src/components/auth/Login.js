@@ -1,43 +1,56 @@
 import { AuthConsumer } from "../../providers/AuthProvider";
 import { useState } from "react";
-import { Button, Form, Segment, Header } from 'semantic-ui-react';
+import { Button, Form, Container, Row, Col } from 'react-bootstrap';
 
-const Login = ({ history, handleLogin}) => {
+const Login = ({ handleLogin}) => {
   const [user, setUser] = useState({ email: '', password: '' })
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleLogin(user, history);
+    handleLogin(user);
+    setUser({ email: '', password: ''});
   }
 
   return (
-    <Segment basic>
-      <Header as='h1' textAlign='center'>Login</Header>
+    <>
+      <h1 textAlign='center'>Login</h1>
       <Form onSubmit={handleSubmit}>
-        <Form.Input 
-          label="Email"
-          autoFocus
-          required
-          name='email'
-          value={user.email}
-          placeholder='Email'
-          onChange={(e) => setUser({ ...user, email: e.target.value})}
-        />
-        <Form.Input 
-          label="Password"
-          required
-          name='password'
-          value={user.password}
-          placeholder='Password'
-          type='password'
-          onChange={(e) => setUser({ ...user, password: e.target.value})}
-        
-        />
-        <Segment textAlign='center' basic>
-          <Button primary type='submit'>Submit</Button>
-        </Segment>
+        <Container>
+          <Row>
+            <Col>
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Email Address</Form.Label>
+                <Form.Control 
+                  type="email"
+                  autoFocus
+                  required
+                  name='email'
+                  value={user.email}
+                  placeholder='name@example.com'
+                  onChange={(e) => setUser({ ...user, email: e.target.value})}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row>  
+            <Col>
+              <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control 
+                  required
+                  name='password'
+                  value={user.password}
+                  placeholder='Password'
+                  type='password'
+                  onChange={(e) => setUser({ ...user, password: e.target.value})}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+        </Container>
+        <Button variant="dark" type='submit'>Submit</Button>
       </Form>
-    </Segment>
+    </>
   )
 }
 

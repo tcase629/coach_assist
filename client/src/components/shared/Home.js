@@ -1,7 +1,6 @@
-import { Header } from 'semantic-ui-react';
 
 const Home = () => (
-  <Header as="h1" textAlign="center">Coach Assist</Header>
+  <h1 textAlign="center">Coach Assist</h1>
 )
 
 export default Home;

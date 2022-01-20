@@ -10,10 +10,58 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_30_220400) do
+ActiveRecord::Schema.define(version: 2022_01_20_043840) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "games", force: :cascade do |t|
+    t.date "date"
+    t.time "time"
+    t.integer "score"
+    t.bigint "team_id", null: false
+    t.bigint "schedule_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["schedule_id"], name: "index_games_on_schedule_id"
+    t.index ["team_id"], name: "index_games_on_team_id"
+  end
+
+  create_table "leagues", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "age"
+    t.integer "number"
+    t.bigint "team_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["team_id"], name: "index_players_on_team_id"
+  end
+
+  create_table "schedules", force: :cascade do |t|
+    t.string "title"
+    t.string "year"
+    t.bigint "league_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["league_id"], name: "index_schedules_on_league_id"
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id", null: false
+    t.bigint "league_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["league_id"], name: "index_teams_on_league_id"
+    t.index ["user_id"], name: "index_teams_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "provider", default: "email", null: false
@@ -45,4 +93,10 @@ ActiveRecord::Schema.define(version: 2021_12_30_220400) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "games", "schedules"
+  add_foreign_key "games", "teams"
+  add_foreign_key "players", "teams"
+  add_foreign_key "schedules", "leagues"
+  add_foreign_key "teams", "leagues"
+  add_foreign_key "teams", "users"
 end

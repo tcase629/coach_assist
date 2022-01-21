@@ -9,4 +9,5 @@ extend Devise::Models
          :recoverable, :rememberable, :validatable,
          :trackable
   include DeviseTokenAuth::Concerns::User
+  has_one :team, dependent: :destroy
 end

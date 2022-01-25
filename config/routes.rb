@@ -3,7 +3,17 @@ Rails.application.routes.draw do
   
   namespace :api do
     resources :users, only: :update
-    
+
+    resources :leagues do 
+      resources :teams 
+      resources :schedule
+    end
+
+    resources :teams do
+      resources :players
+      resources :games
+    end
+
   end
   
 end

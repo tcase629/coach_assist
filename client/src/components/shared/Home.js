@@ -1,6 +1,11 @@
+import { Card } from 'react-bootstrap';
 
 const Home = () => (
-  <h1 textAlign="center">Coach Assist</h1>
+  <>
+    <Card style={{ width: '100%' }}>
+      <Card.Img style={{ width: '50%', height: '100%'}} src="images/Coach-Assist.png" />
+    </Card>
+  </>
 )
 
 export default Home;

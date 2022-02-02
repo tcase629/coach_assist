@@ -3,6 +3,8 @@ import Nomatch from './components/shared/Nomatch';
 import Navigation from './components/shared/Navigation';
 import Login from './components/auth/Login';
 import Register from  './components/auth/Register';
+import Teams from './components/teams/Teams';
+import ShowTeam from './components/teams/ShowTeam'
 import { Route, Routes } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import FetchUser from './components/auth/FetchUser';
@@ -22,6 +24,8 @@ const App = () => (
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <ProtectedRoute path="/teams" element={<Teams />} />
+            <ProtectedRoute path="/teams/:id" element={<ShowTeam />} />
             <Route path="/*" element={<Nomatch />} />
           </Routes>
         </>

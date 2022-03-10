@@ -21,11 +21,11 @@ const App = () => (
             <Route path="/" element={<Home />} />
             <Route path="/" element={<ProtectedRoute />}>
               <Route path="/profile" element={<Profile />} />
+              <Route path="/teams" element={<Teams />} />
+              <Route path="/teams/:id" element={<ShowTeam />} />
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <ProtectedRoute path="/teams" element={<Teams />} />
-            <ProtectedRoute path="/teams/:id" element={<ShowTeam />} />
             <Route path="/*" element={<Nomatch />} />
           </Routes>
         </>

@@ -2,7 +2,7 @@ import { TeamConsumer } from "../../providers/TeamProvider";
 import { useState } from 'react';
 import TeamForm from './TeamForm';
 import { Modal, Button } from 'react-bootstrap';
-import Players from '../players/Players';
+// import Players from '../players/Players';
 
 const ShowTeam = ({ location, deleteTeam }) => {
   const [open, setOpen] = useState(false)
@@ -37,7 +37,7 @@ const ShowTeam = ({ location, deleteTeam }) => {
       <Button color="red" onClick={() => deleteTeam(id)}>
         Delete
       </Button>
-      <Players teamId={id} />
+      {/* <Players teamId={id} /> */}
     </>
   )
 }
